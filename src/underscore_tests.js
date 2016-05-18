@@ -27,15 +27,18 @@ var _ = { };
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if (n) {
+    if (n >= array.length) {
+      return array;
+    }
+    else if (n) {
       var newArray = [];
       for (var i = array.length - 1; i >= (array.length - n); i--) {
-        newArray.push(array[i]);
+        newArray.unshift(array[i]);
       }
       return newArray;
     }
     else {
-      return array.slice(array.length, n);
+      return array[array.length - 1];
     }
   };
 
@@ -47,10 +50,23 @@ var _ = { };
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
   _.indexOf = function(array, target){
+    return array.indexOf(target);
   };
+
 
   // Return all elements of an array that pass a truth test ('iterator' function argument)
   _.filter = function(collection, iterator) {
+    var evensArray = [];
+    var oddsArray = [];
+    for (var i = 0; i < collection.length; i++) {
+      if ((collection[i] % 2) === 0) {
+        evensArray.push(collection[i]);
+      }
+      else if ((collection[i] % 2) !== 0) {
+        oddsArray.push(collection[i]);
+      }
+    }
+    return evensArray, oddsArray;
   };
 
   // Return all elements of an array that don't pass a truth test (the 'iterator' function argument)
